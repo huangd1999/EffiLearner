@@ -1,7 +1,6 @@
 from transformers import T5ForConditionalGeneration, AutoTokenizer,GPTNeoForCausalLM,AutoModelForCausalLM,AutoModel, AutoModelForSeq2SeqLM
 import torch
 import json
-import tiktoken
 from tqdm import tqdm
 import os
 import argparse

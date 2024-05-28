@@ -1,32 +1,27 @@
-# SOAP: Self-Optimization Improves the Efficiency of Code Generation
+# SOAP: SOAP: Enhancing Efficiency of Generated Code via Self-Optimization
 
-## Reproduce paper results
-
-We first generate initial code based on the task description:
+## Installation
 
 ```
-# mbpp
-python mbpp_generation.py
-
-# humaneval
-python humaneval_generation.py
-
-# EffiBench
-python effibench_generation.py
+git clone https://github.com/huangd1999/SOAP
+cd SOAP
+pip install -r requirements.txt
 ```
 
-Then, SOAP will optimize the efficiency of LLM generated code:
+## Usage
+
+We first generate initial inefficient code by runing the following commands:
+```
+cd src
+python initial_code_generation_example.py --checkpoint [huggingface model name] --dataset EffiBench
+```
+
+Then, we can use SOAP to optimize the efficiency of the initial code with the following commands:
 
 ```
-# mbpp
-python mbpp_selfoptimizer.py
-
-# humaneval
-python humaneval_selfoptimizer.py
-
-# EffiBench
-python effibench_self_optimizer.py
+python SOAP.py --checkpoint [huggingface model name] --dataset EffiBench
 ```
+
 
 ## Report Efficiency results
 
