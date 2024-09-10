@@ -1,4 +1,4 @@
-# SOAP: SOAP: Enhancing Efficiency of Generated Code via Self-Optimization
+# SOAP: Enhancing Efficiency of Generated Code via Self-Optimization
 
 ## Installation
 
