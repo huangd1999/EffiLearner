@@ -68,7 +68,9 @@ def fetch_completion(data_entry_lists, model,tokenizer):
     for data_entry in data_entry_lists:
         if "overhead" not in data_entry.keys():
             overhead = "The code execution failed."
-
+        else:
+            overhead = data_entry["overhead"]
+        
         completion = data_entry["completion"]
         if data_entry["dataset"] == "EffiBench":
             test_case = data_entry["small_test_cases"]
@@ -79,8 +81,7 @@ def fetch_completion(data_entry_lists, model,tokenizer):
         elif data_entry["dataset"] == "MBPP":
             test_case = "\n".join(data_entry["test_list"])
             task_description = data_entry["prompt"]
-
-        overhead = ""
+            
         prompt = prompt_construction(task_description, test_case, completion, overhead)
         inputs_batchs.append(prompt)
 
