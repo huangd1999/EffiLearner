@@ -64,6 +64,7 @@ if __name__ == "__main__":
     args = args.parse_args()
 
     checkpoint = args.checkpoint
+    batch_size = args.batch_size
     print("Checkpoint: ",checkpoint)
 
     if "/" in checkpoint:
