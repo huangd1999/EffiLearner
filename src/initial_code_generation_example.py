@@ -73,7 +73,7 @@ if __name__ == "__main__":
     if args.dataset == "EffiBench":
         with open("./datasets/dataset.json", "r") as f:
             dataset = json.load(f)
-    elif args.dataset == "HumanEval:
+    elif args.dataset == "HumanEval":
         dataset = load_dataset("evalplus/humanevalplus",split="test")
     elif args.dataset == "MBPP":
         dataset = load_dataset("evalplus/mbppplus",split="test")
