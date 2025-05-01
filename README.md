@@ -1,10 +1,10 @@
-# SOAP: Enhancing Efficiency of Generated Code via Self-Optimization
+# EffiLearner: Enhancing Efficiency of Generated Code via Self-Optimization
 
 ## Installation
 
 ```
-git clone https://github.com/huangd1999/SOAP
-cd SOAP
+git clone https://github.com/huangd1999/EffiLearner
+cd EffiLearner
 pip install -r requirements.txt
 ```
 
@@ -16,10 +16,10 @@ cd src
 python initial_code_generation_example.py --checkpoint [huggingface model name] --dataset EffiBench
 ```
 
-Then, we can use SOAP to optimize the efficiency of the initial code with the following commands:
+Then, we can use EffiLearner to optimize the efficiency of the initial code with the following commands:
 
 ```
-python SOAP.py --checkpoint [huggingface model name] --dataset EffiBench
+python EffiLearner.py --checkpoint [huggingface model name] --dataset EffiBench
 ```
 
 
