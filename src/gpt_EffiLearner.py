@@ -13,9 +13,6 @@ import time
 from code_efficiency_calculator import calculate_code_execution_efficiency
 from tqdm import tqdm
 
-with open("./dataset.json", "r") as f:
-    leetcode = json.load(f)
-
 
 def prompt_construction(task_description, test_case, completion, overhead_prompt):
     prompt = f"""
@@ -116,9 +113,6 @@ overhead_dict = {
 for model in model_list:
     with open(f"./EffiBench_{model}.json", "r") as f:
         dataset = json.load(f)
-    for i in range(len(dataset)):
-        dataset[i]["small_test_cases"] = leetcode[i]["small_test_cases"]
-        dataset[i]["test_case"] = leetcode[i]["test_case"]
 
     for i in range(5):
         total_memory_usage = 0
@@ -227,9 +221,8 @@ The maximum memory peak requirement is: {round(total_max_memory_peak/correct, 2)
         overhead_dict["max_memory_peak"].append(round(total_max_memory_peak/correct, 2))
         overhead_dict["correct"].append(correct)
 
-    print(overhead_dict)
-    with open(f"./leetcode_{model}_subset.json", "w") as f:
+    with open(f"./EffiBench_{model}.json", "w") as f:
         json.dump(dataset, f, indent=4)
-    with open(f"./overhead_{model}_subset.json", "w") as f:
+    with open(f"./overhead_{model}.json", "w") as f:
         json.dump(overhead_dict, f, indent=4)
     print(f"Model {model} is done")
