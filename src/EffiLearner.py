@@ -103,7 +103,7 @@ if __name__ == "__main__":
     checkpoint = args.checkpoint
     epoch = args.epoch
     print("Checkpoint: ",checkpoint)
-
+    model_name = checkpoint.split("/")[-1]
     model = AutoModelForCausalLM.from_pretrained(checkpoint,device_map = "auto",trust_remote_code=True,torch_dtype=torch.float16)
     tokenizer = AutoTokenizer.from_pretrained(checkpoint,trust_remote_code=True)
     overhead_dict = {
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
 
     for i in tqdm(range(len(dataset))):
-        overhead, memory_usage, execution_time, max_memory_peak,executable = calculate_code_execution_efficiency(dataset[i],evaluation_code=True,)
+        overhead, memory_usage, execution_time, max_memory_peak,executable = calculate_code_execution_efficiency(dataset[i],evaluation_code=True)
         if executable:
             dataset[i]["overhead"] = overhead
             dataset[i]["memory_usage"] = memory_usage
@@ -149,7 +149,7 @@ if __name__ == "__main__":
             correct+=1
 
     if correct==0:
-        correct+=1
+        correct=1
     total_overhead = f"""
 The total memory usage during the code execution is: {round(total_memory_usage/correct,2)} MB*s.
 The total execution time is: {round(total_execution_time/correct,2)} s.
@@ -176,7 +176,7 @@ The maximum memory peak requirement is: {round(total_max_memory_peak/correct,2)}
             tmp_code = dataset[i]["completion"]
             dataset[i]["completion"] = dataset[i]["tmp_completion"]
             overhead, memory_usage, execution_time, max_memory_peak,executable = calculate_code_execution_efficiency(dataset[i],evaluation_code=True)
-            if ("memory_usage" not in dataset[i].keys()) and executable:
+            if (("memory_usage" not in dataset[i].keys()) or (memory_usage < dataset[i]["memory_usage"])) and executable:
                 dataset[i]["memory_usage"] = memory_usage
                 dataset[i]["execution_time"] = execution_time
                 dataset[i]["max_memory_peak"] = max_memory_peak
